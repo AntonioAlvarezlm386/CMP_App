@@ -1,0 +1,33 @@
+### IntelliJ IDEA, Android Studio y archivos de IDE
+.idea/
+.kotlin/
+*.iml
+.DS_Store
+xcuserdata
+captures
+local.properties
+*.log
+
+### Gradle y directorios de compilación
+.gradle/
+**/build/
+!src/**/build/  # Excluye la carpeta 'build' dentro de 'src' si existe
+.externalNativeBuild/
+
+### Kotlin y archivos de compilación
+*.class
+*.kotlin_builtins
+*.kotlin_module
+
+### Proyectos de iOS (Xcode)
+# Directorios de proyectos de Xcode
+*.xcodeproj/
+*.xcworkspace/
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/
+.cxx
+
+### Archivos de sistema y misceláneos
+Thumbs.db
