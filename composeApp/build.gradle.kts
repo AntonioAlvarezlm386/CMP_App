@@ -37,11 +37,19 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
+            implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.material.icons.core)
+
+
+
+            //Navigation
+            implementation(dependencyNotation = libs.voyager.navigator)
+            implementation(dependencyNotation = libs.voyager.tabNavigator)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
