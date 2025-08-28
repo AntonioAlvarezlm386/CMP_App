@@ -29,3 +29,9 @@ dependencyResolutionManagement {
 }
 
 include(":composeApp")
+include(":infrastructure:navigation")
+include(":infrastructure:network")
+include(":infrastructure:database")
+include(":shared:ui")
+include(":feature:login")
+include(":feature:home")
