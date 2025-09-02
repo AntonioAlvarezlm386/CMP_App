@@ -27,5 +27,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
 include(":composeApp")
+include(":core:designsystem")
+include(":shared:test")

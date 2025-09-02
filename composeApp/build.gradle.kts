@@ -34,14 +34,21 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
+//            api(projects.core.designsystem)
+            implementation(projects.shared.test)
+
+
+            implementation(compose.components.resources)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
-            implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
+            implementation(libs.permissions.camera)
+            api(libs.permissions.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -79,4 +86,5 @@ android {
 dependencies {
     debugImplementation(compose.uiTooling)
 }
+
 
