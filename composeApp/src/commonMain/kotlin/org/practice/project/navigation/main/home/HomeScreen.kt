@@ -20,16 +20,16 @@ import androidx.navigation.compose.rememberNavController
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(
-    navController: NavHostController = rememberNavController()
+    rootNavController: NavHostController = rememberNavController()
 ) {
     Scaffold(
         bottomBar = {
             BottomBar(
-                navController = navController
+                navController = rootNavController
             )
         }
     ) {
-        HomeNavGraph(navController)
+        HomeNavGraph(rootNavController)
     }
 
 }
@@ -50,7 +50,6 @@ fun BottomBar(
 
     val bottomBarDestination = screens.any {it.route == currentDestination?.route}
     if(bottomBarDestination){
-        if (bottomBarDestination) {
             NavigationBar {
                 screens.forEach { screen ->
                     AddItem(
@@ -59,7 +58,6 @@ fun BottomBar(
                         navController = navController
                     )
                 }
-            }
         }
     }
 
@@ -86,8 +84,11 @@ fun RowScope.AddItem(
         } == true,
         onClick = {
             navController.navigate(screen.route) {
-                popUpTo(navController.graph.findStartDestination().id)
+                popUpTo(navController.graph.findStartDestination().id){
+                    saveState = true
+                }
                 launchSingleTop = true
+                restoreState = true
             }
         }
     )

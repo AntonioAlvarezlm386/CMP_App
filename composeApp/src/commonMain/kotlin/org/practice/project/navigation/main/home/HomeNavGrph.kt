@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import org.practice.project.navigation.RootGraph
 import org.practice.project.navigation.ScreenContent
 import org.practice.project.navigation.main.details.detailsNavGraph
+import org.practice.project.navigation.main.settings.settingsNavGraph
 
 
 @Composable
@@ -30,6 +31,7 @@ fun HomeNavGraph(navController: NavHostController){
             ScreenContent(
                 name = BottomBarScreenItems.Settings.route,
                 onclick = {
+                    navController.navigate(RootGraph.SETTINGS)
                 }
             )
         }
@@ -43,5 +45,8 @@ fun HomeNavGraph(navController: NavHostController){
         }
 
         detailsNavGraph(navController)
+
+        settingsNavGraph(navController)
+
     }
 }

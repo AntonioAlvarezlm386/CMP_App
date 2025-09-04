@@ -32,4 +32,5 @@ object RootGraph {
     const val AUTHENTICATION = "auth_graph"
     const val HOME = "home_graph"
     const val DETAILS = "details_graph"
+    const val SETTINGS = "SETTINGSSUB"
 }
