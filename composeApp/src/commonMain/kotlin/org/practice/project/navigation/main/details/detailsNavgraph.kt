@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import org.practice.project.navigation.RootGraph
 import org.practice.project.navigation.ScreenContent
+import org.practice.project.paging.ProductsPaging
 
 
 fun NavGraphBuilder.detailsNavGraph(navController: NavHostController){
@@ -24,11 +25,27 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController){
         }
 
         composable(route = DetailsScreenRoutes.Overview.route) {
-            ScreenContent(name = DetailsScreenRoutes.Overview.route,
-                onclick = {
+            ProductsPaging(name = DetailsScreenRoutes.Overview.route,
+                onClick = {
                     navController.popBackStack(
                         route = DetailsScreenRoutes.Information.route,
                         inclusive = false
+                    )
+                },
+                toTabs = {
+                    navController.navigate(DetailsScreenRoutes.Tabs.route)
+                }
+            )
+        }
+
+
+        composable(route = DetailsScreenRoutes.Tabs.route) {
+            TabsScreen(
+                name = DetailsScreenRoutes.Tabs.route,
+                onClick = {
+                    navController.popBackStack(
+                        DetailsScreenRoutes.Overview.route,
+                        inclusive = true
                     )
                 }
             )
@@ -41,4 +58,5 @@ fun NavGraphBuilder.detailsNavGraph(navController: NavHostController){
 sealed class DetailsScreenRoutes(val route: String) {
     object Information : DetailsScreenRoutes(route = "INFORMATION")
     object Overview : DetailsScreenRoutes(route = "OVERVIEW")
+    object Tabs : DetailsScreenRoutes(route = "TABS")
 }
