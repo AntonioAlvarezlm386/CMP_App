@@ -1,5 +1,7 @@
 package org.practice.project.navigation.auth
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,35 +14,36 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 
 // LoginScreen.kt
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit,
-    onNavigateToRegister: () -> Unit
+    onLogin: () -> Unit,
+    onRegister: () -> Unit,
+    onForgotPass: () -> Unit
 ) {
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Pantalla de Login", style = MaterialTheme.typography.titleSmall)
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = onLoginSuccess,
-                modifier = Modifier.width(200.dp)
-            ) {
-                Text("Iniciar Sesión")
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                onClick = onNavigateToRegister,
-                modifier = Modifier.width(200.dp)
-            ) {
-                Text("Registrarse")
-            }
-        }
+        Text(
+            modifier = Modifier.clickable { onLogin() },
+            text = "LOGIN",
+            style = MaterialTheme.typography.titleLarge,
+        )
+        Text(
+            modifier = Modifier.clickable { onRegister() },
+            text = "Register",
+            style = MaterialTheme.typography.titleLarge,
+        )
+        Text(
+            modifier = Modifier.clickable { onForgotPass() },
+            text = "Forgot Pass",
+            style = MaterialTheme.typography.titleLarge,
+        )
     }
 }

@@ -1,41 +1,42 @@
 package org.practice.project.navigation.auth
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHost
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import org.practice.project.navigation.Destinations
+import androidx.navigation.navigation
+import org.practice.project.navigation.RootGraph
+import org.practice.project.navigation.ScreenContent
 
-@Composable
-fun AuthNavGraph(
-    navController: NavHostController,
-    onLoginSuccess: () -> Unit,
-    modifier: Modifier = Modifier
-){
-    NavHost(
-        navController = navController,
-        startDestination = Destinations.HOME,
-        modifier = modifier
-    ){
-        composable (Destinations.LOGIN){
+fun NavGraphBuilder.authNavGraph(navController: NavHostController) {
+    navigation(
+        route = RootGraph.AUTHENTICATION,
+        startDestination = AuthScreen.Login.route
+    ) {
+        composable(route = AuthScreen.Login.route) {
             LoginScreen(
-                onLoginSuccess = onLoginSuccess,
-                onNavigateToRegister = {
-                    navController.navigate(Destinations.REGISTER)
+                onLogin = {
+                    navController.popBackStack()
+                    navController.navigate(RootGraph.HOME)
+                },
+                onRegister = {
+                    navController.navigate(AuthScreen.SignUp.route)
+                },
+                onForgotPass = {
+                    navController.navigate(AuthScreen.Forgot.route)
                 }
             )
         }
-
-
-        composable(Destinations.REGISTER) {
-            RegisterScreen(
-                onRegisterSuccess = onLoginSuccess,
-                onNavigateBack = {
-                    navController.popBackStack()
-                }
-            )
+        composable(route = AuthScreen.SignUp.route) {
+            ScreenContent(name = AuthScreen.SignUp.route) {}
+        }
+        composable(route = AuthScreen.Forgot.route) {
+            ScreenContent(name = AuthScreen.Forgot.route) {}
         }
     }
+}
+
+sealed class AuthScreen(val route: String) {
+    object Login : AuthScreen(route = "LOGIN")
+    object SignUp : AuthScreen(route = "SIGN_UP")
+    object Forgot : AuthScreen(route = "FORGOT")
 }

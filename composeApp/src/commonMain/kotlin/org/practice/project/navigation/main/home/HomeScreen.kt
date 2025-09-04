@@ -1,44 +1,94 @@
 package org.practice.project.navigation.main.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import org.practice.project.navigation.ExitConfirmationDialog
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 
 // HomeScreen.kt
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun HomeScreen(
-    onNavigateToAgendaDetail: (String) -> Unit
+    navController: NavHostController = rememberNavController()
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Scaffold(
+        bottomBar = {
+            BottomBar(
+                navController = navController
+            )
+        }
     ) {
+        HomeNavGraph(navController)
+    }
+
+}
 
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text("Pantalla Principal", style = MaterialTheme.typography.labelMedium)
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = { onNavigateToAgendaDetail("123") }
-            ) {
-                Text("Ir a Detalle Agenda")
+@Composable
+fun BottomBar(
+    navController: NavHostController
+){
+    val screens = listOf(
+        BottomBarScreenItems.Home,
+        BottomBarScreenItems.Profile,
+        BottomBarScreenItems.Settings
+    )
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    val bottomBarDestination = screens.any {it.route == currentDestination?.route}
+    if(bottomBarDestination){
+        if (bottomBarDestination) {
+            NavigationBar {
+                screens.forEach { screen ->
+                    AddItem(
+                        screen = screen,
+                        currentDestination = currentDestination,
+                        navController = navController
+                    )
+                }
             }
         }
     }
+
+}
+
+@Composable
+fun RowScope.AddItem(
+    screen: BottomBarScreenItems,
+    currentDestination: NavDestination?,
+    navController: NavHostController
+) {
+    NavigationBarItem (
+        label = {
+            Text(text = screen.title)
+        },
+        icon = {
+            Icon(
+                imageVector = screen.icon,
+                contentDescription = "Navigation Icon"
+            )
+        },
+        selected = currentDestination?.hierarchy?.any {
+            it.route == screen.route
+        } == true,
+        onClick = {
+            navController.navigate(screen.route) {
+                popUpTo(navController.graph.findStartDestination().id)
+                launchSingleTop = true
+            }
+        }
+    )
 }
