@@ -16,11 +16,9 @@ fun NavGraphBuilder.settingsNavGraph(navController: NavHostController){
         startDestination = SettingsScreenRoutes.BtootmSheets.route
     ) {
         composable(route = SettingsScreenRoutes.BtootmSheets.route) {
-            ScreenContent(
+            BottomSheetScreen(
                 name = SettingsScreenRoutes.BtootmSheets.route,
-                onclick = {
-
-                }
+                onClick = {},
             )
         }
 
