@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -36,6 +37,8 @@ kotlin {
             implementation(libs.androidx.activity.compose)
 
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.android.driver)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -57,13 +60,17 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
 
+            implementation(libs.multiplatform.settings)
 
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
         iosMain.dependencies {
-
+            implementation(libs.native.driver)
             implementation(libs.ktor.client.darwin)
         }
     }
@@ -98,5 +105,14 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+}
+
+sqldelight{
+    databases{
+        create("AppDatabase"){
+            packageName.set("org.practice.org")
+            srcDirs("src/commonMain/sqldelight")
+        }
+    }
 }
 

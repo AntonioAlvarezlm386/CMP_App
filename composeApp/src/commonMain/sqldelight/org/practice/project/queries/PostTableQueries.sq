@@ -1,0 +1,14 @@
+
+
+readAllPosts:
+SELECT PostTable.*
+FROM PostTable;
+
+
+insertPost:
+INSERT INTO PostTable(userId, id, title, body)
+VALUES(?, ?, ?, ?);
+
+
+removeAllPosts:
+DELETE FROM PostTable;
