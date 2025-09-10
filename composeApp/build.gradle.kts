@@ -39,6 +39,21 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.android.driver)
             implementation(libs.koin.android)
+
+
+
+            // Camera X
+            implementation(libs.androidx.camera.core)
+            implementation(libs.androidx.camera.camera2)
+            implementation(libs.androidx.camera.lifecycle)
+            implementation(libs.androidx.camera.view)
+
+            // Permissions
+            implementation(libs.androidx.activity.compose)
+
+            // File handling
+            implementation(libs.androidx.core.ktx.v1170)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -47,9 +62,17 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
+            implementation(libs.androidx.jetbrains.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
+
+            // Coroutines
+            implementation(libs.kotlinx.coroutines.core)
+
+
+            // DateTime
+            //noinspection UseTomlInstead
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
 
             implementation(libs.navigation.compose)
             implementation(libs.material.icons.core)
@@ -65,6 +88,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.core)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
