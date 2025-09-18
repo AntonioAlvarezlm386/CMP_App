@@ -1,5 +1,5 @@
 [versions]
-agp = "8.11.1"
+agp = "8.11.2"
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -68,6 +68,8 @@ ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx
 
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
+
+maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version = "0.11.1" }
 
 
 [plugins]

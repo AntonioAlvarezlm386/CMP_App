@@ -5,8 +5,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.practice.project.navigation.RootGraph
+import org.practice.project.navigation.RootNavGraph
 import org.practice.project.navigation.ScreenContent
 import org.practice.project.navigation.main.details.detailsNavGraph
+import org.practice.project.navigation.main.maps.MapScreen
+import org.practice.project.navigation.main.profile.ProfileScreen
 import org.practice.project.navigation.main.settings.settingsNavGraph
 
 
@@ -38,11 +41,16 @@ fun HomeNavGraph(navController: NavHostController){
 
 
         composable(BottomBarScreenItems.Profile.route) {
-            ScreenContent(
+            ProfileScreen(
                 name = BottomBarScreenItems.Profile.route,
-                onclick = {}
+                onMapClick = { navController.navigate(RootGraph.MAP) }
             )
         }
+
+        composable(route = RootGraph.MAP) {
+            MapScreen()
+        }
+
 
         detailsNavGraph(navController)
 

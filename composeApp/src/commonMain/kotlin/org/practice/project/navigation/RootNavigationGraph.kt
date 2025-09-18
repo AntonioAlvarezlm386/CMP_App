@@ -33,4 +33,5 @@ object RootGraph {
     const val HOME = "home_graph"
     const val DETAILS = "details_graph"
     const val SETTINGS = "SETTINGSSUB"
+    const val MAP = "MAP_SCREEN"
 }

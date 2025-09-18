@@ -89,6 +89,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.core)
 
+
+            implementation(libs.maplibre.compose)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -96,6 +99,7 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.native.driver)
             implementation(libs.ktor.client.darwin)
+
         }
     }
 }
