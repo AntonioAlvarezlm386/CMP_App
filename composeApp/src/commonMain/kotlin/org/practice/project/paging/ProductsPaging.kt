@@ -107,43 +107,57 @@ fun ProductsPaging(
         Spacer(modifier = Modifier.height(10.dp))
 
 
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ){
+            LazyColumn(
+                state = lazyListState,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentPadding = contentPadding
+            ) {
 
 
-        LazyColumn(
-            state = lazyListState,
-            modifier = Modifier
-                .fillMaxSize(),
-            contentPadding = contentPadding
-        ) {
-
-
-            items(state.products) { product ->
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Text(
-                        text = product.title,
-                        fontSize = 18.sp
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        text = "$ ${product.price}"
-                    )
-                }
-            }
-            if (state.isLoadingMore) {
-                item {
-                    Box(
+                items(state.products) { product ->
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth(),
-                        contentAlignment = Alignment.Center
+                            .fillMaxWidth()
+                            .padding(16.dp)
                     ) {
-                        CircularProgressIndicator()
+                        Text(
+                            text = product.title,
+                            fontSize = 18.sp
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "$ ${product.price}"
+                        )
+                    }
+                }
+                if (state.isLoadingMore) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
                     }
                 }
             }
+
+
+
+            Button(
+                onClick = { /* Lógica del botón */ },
+                modifier = Modifier
+                    .align(Alignment.BottomCenter) // Alinea el botón a la parte inferior-derecha del Box
+                    .padding(54.dp) // Añade un padding para separarlo de los bordes
+            ) {
+                Text(text = "Click")
+            }
+
         }
     }
 }
