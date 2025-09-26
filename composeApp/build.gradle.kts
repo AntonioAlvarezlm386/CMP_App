@@ -48,8 +48,6 @@ kotlin {
             implementation(libs.androidx.camera.lifecycle)
             implementation(libs.androidx.camera.view)
 
-            // Permissions
-            implementation(libs.androidx.activity.compose)
 
             // File handling
             implementation(libs.androidx.core.ktx.v1170)

@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import org.practice.project.firma.ui.SignatureScreen
 import org.practice.project.navigation.RootGraph
 import org.practice.project.navigation.RootNavGraph
 import org.practice.project.navigation.ScreenContent
@@ -43,9 +44,18 @@ fun HomeNavGraph(navController: NavHostController){
         composable(BottomBarScreenItems.Profile.route) {
             ProfileScreen(
                 name = BottomBarScreenItems.Profile.route,
-                onMapClick = { navController.navigate(RootGraph.MAP) }
+                onMapClick = { navController.navigate(RootGraph.MAP) },
+                onSignatureClick = { navController.navigate(RootGraph.SIGNATURE) }
             )
         }
+
+        composable(RootGraph.SIGNATURE) {
+            SignatureScreen (
+                name = RootGraph.SIGNATURE
+            )
+        }
+
+
 
         composable(route = RootGraph.MAP) {
             MapScreen()

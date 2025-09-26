@@ -12,11 +12,13 @@ import androidx.compose.ui.Modifier
 import kotlinx.coroutines.coroutineScope
 import org.practice.project.navigation.Event
 import org.practice.project.navigation.EventBus
+import org.practice.project.navigation.RootGraph
 
 @Composable
 fun ProfileScreen(
     name: String,
-    onMapClick:() -> Unit
+    onMapClick:() -> Unit,
+    onSignatureClick:() -> Unit
 ){
     val viewmodel = ProfileViewmodel()
     Box(
@@ -35,6 +37,11 @@ fun ProfileScreen(
                 viewmodel.onDateTimeClick(Event.Toast("Mensaje dese click"))
             },
             text = "DATETIME",
+            style = MaterialTheme.typography.titleLarge
+        )
+        Text(
+            modifier = Modifier.clickable{ onSignatureClick() },
+            text = RootGraph.SIGNATURE,
             style = MaterialTheme.typography.titleLarge
         )
     }

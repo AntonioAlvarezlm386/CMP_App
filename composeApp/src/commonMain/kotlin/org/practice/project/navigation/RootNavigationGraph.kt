@@ -35,4 +35,5 @@ object RootGraph {
     const val SETTINGS = "SETTINGSSUB"
     const val MAP = "MAP_SCREEN"
     const val DATETIME = "DATETIME"
+    const val SIGNATURE = "SIGNATURE"
 }
