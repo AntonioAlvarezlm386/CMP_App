@@ -18,7 +18,8 @@ import org.practice.project.navigation.RootGraph
 fun ProfileScreen(
     name: String,
     onMapClick:() -> Unit,
-    onSignatureClick:() -> Unit
+    onSignatureClick:() -> Unit,
+    onCameraClick:() -> Unit,
 ){
     val viewmodel = ProfileViewmodel()
     Box(
@@ -42,6 +43,11 @@ fun ProfileScreen(
         Text(
             modifier = Modifier.clickable{ onSignatureClick() },
             text = RootGraph.SIGNATURE,
+            style = MaterialTheme.typography.titleLarge
+        )
+        Text(
+            modifier = Modifier.clickable{ onCameraClick() },
+            text = RootGraph.CAMERA,
             style = MaterialTheme.typography.titleLarge
         )
     }

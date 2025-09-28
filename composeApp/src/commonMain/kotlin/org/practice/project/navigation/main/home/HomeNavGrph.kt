@@ -1,5 +1,6 @@
 package org.practice.project.navigation.main.home
 
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -14,6 +15,7 @@ import org.practice.project.navigation.main.profile.ProfileScreen
 import org.practice.project.navigation.main.settings.settingsNavGraph
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeNavGraph(navController: NavHostController){
     NavHost(
@@ -45,7 +47,8 @@ fun HomeNavGraph(navController: NavHostController){
             ProfileScreen(
                 name = BottomBarScreenItems.Profile.route,
                 onMapClick = { navController.navigate(RootGraph.MAP) },
-                onSignatureClick = { navController.navigate(RootGraph.SIGNATURE) }
+                onSignatureClick = { navController.navigate(RootGraph.SIGNATURE) },
+                onCameraClick = { navController.navigate(RootGraph.CAMERA) }
             )
         }
 
@@ -53,7 +56,7 @@ fun HomeNavGraph(navController: NavHostController){
             SignatureScreen (
                 name = RootGraph.SIGNATURE
             )
-        }
+        }''
 
 
 
