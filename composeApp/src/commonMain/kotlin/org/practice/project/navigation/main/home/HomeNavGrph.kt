@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import org.practice.project.camera.CameraScreen
+import org.practice.project.camera.CameraScreenViewModel
 import org.practice.project.firma.ui.SignatureScreen
 import org.practice.project.navigation.RootGraph
 import org.practice.project.navigation.RootNavGraph
@@ -63,6 +65,12 @@ fun HomeNavGraph(navController: NavHostController){
         composable(route = RootGraph.MAP) {
             MapScreen()
         }
+
+        composable(route = RootGraph.CAMERA) {
+            CameraScreen(
+            )
+        }
+
 
 
         detailsNavGraph(navController)

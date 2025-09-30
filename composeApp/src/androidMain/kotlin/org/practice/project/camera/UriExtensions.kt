@@ -9,21 +9,25 @@ import android.net.Uri
 import java.io.InputStream
 
 
-fun Uri.toBitMap(contentResolver: ContentResolver): Bitmap? = runCatching{
-    val inputStremaForBitMap = contentResolver.openInputStream(this)
-    val bitmap = inputStremaForBitMap?.let{
-        BitmapFactory.decodeStream(it)
+fun Uri.toBitMap(contentResolver: ContentResolver): Bitmap? {
+    return runCatching {
+        val inputStreamForBitMap = contentResolver.openInputStream(this)
+        val bitmap = inputStreamForBitMap?.use {
+            BitmapFactory.decodeStream(it)
+        }
+
+        val inputStreamForExif = contentResolver.openInputStream(this)
+        val rotatedBitMap = bitmap?.rotatIfIsRequired(inputStreamForExif)
+
+        rotatedBitMap
+    }.getOrElse {
+        null
     }
-
-    val inputStreamForExif = contentResolver.openInputStream(this)
-    val rotatedBitMap = bitmap?.rotatIfIsRequired(inputStreamForExif)
-
-    rotatedBitMap
-}.getOrNull()
+}
 
 
-fun Bitmap.rotatIfIsRequired(inputStream: InputStream?): Bitmap{
-    if(inputStream == null) return  this
+fun Bitmap.rotatIfIsRequired(inputStream: InputStream?): Bitmap {
+    if(inputStream == null) return this
 
     return runCatching {
         val exif = ExifInterface(inputStream)

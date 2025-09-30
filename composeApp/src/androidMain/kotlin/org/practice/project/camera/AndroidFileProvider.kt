@@ -22,7 +22,6 @@ class AndroidFileProvider: FileProvider(
 
             val authority = "${context.applicationContext.packageName}.provider"
 
-
             getUriForFile(
                 context,
                 authority,
