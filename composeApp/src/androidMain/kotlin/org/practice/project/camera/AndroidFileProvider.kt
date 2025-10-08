@@ -5,16 +5,19 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import org.practice.project.R
 import java.io.File
-import kotlin.time.Clock
 
 class AndroidFileProvider: FileProvider(
     R.xml.path_provider
 ) {
     companion object {
-        fun getImageUri(context: Context): Uri? = runCatching {
+        fun createTempFileUri(
+            context: Context,
+            prefix: String,
+            extensions: String
+        ): Uri? = runCatching {
             val tempFile = File.createTempFile(
-                "picture_${System.currentTimeMillis()}",
-                ".png",
+                "${prefix}_${System.currentTimeMillis()}",
+                ".${extensions}}",
                 context.cacheDir
             ).apply {
                 createNewFile()

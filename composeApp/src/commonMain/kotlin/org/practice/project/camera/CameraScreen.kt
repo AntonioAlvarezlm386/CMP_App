@@ -38,11 +38,9 @@ fun CameraScreen(
 ){
     val viewModel = viewModel<CameraScreenViewModel>()
     val sharedImageState = remember { mutableStateOf<SharedImage?>(null) }
-    val hasTriedCapture = remember { mutableStateOf(false) }
 
-    val cameraManager = rememberCameraManager { sharedImage ->
-        sharedImageState.value = sharedImage
-        hasTriedCapture.value = true
+    val cameraManager = rememberCameraManager { capturedImage ->
+        sharedImageState.value = capturedImage
     }
 
     LaunchedEffect(Unit) {
@@ -52,12 +50,6 @@ fun CameraScreen(
             }
         }
     }
-
-//    LaunchedEffect(hasTriedCapture.value, sharedImageState.value) {
-//        if (hasTriedCapture.value && sharedImageState.value == null) {
-//            hasTriedCapture.value = false
-//        }
-//    }
 
 
     NewsScreen(

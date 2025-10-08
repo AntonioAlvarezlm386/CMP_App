@@ -11,7 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 
-actual class CameraManager actual constructor(private val onLaunch: () -> Unit) {
+actual class CameraManager actual constructor(
+    private val onLaunch: () -> Unit
+) {
     actual fun launch() {
         onLaunch()
     }
@@ -31,13 +33,7 @@ actual fun rememberCameraManager(onResult: (SharedImage?) -> Unit): CameraManage
                     val bitmap = tmpPhotoUri!!.toBitMap(contentResolver)
                     if (bitmap != null) {
                         println("Bitmap created successfully")
-                        val savedPath = saveImageOnInternalStorage(context, bitmap)
-                        if (savedPath != null) {
-                            println("Image saved permanently at: $savedPath")
-                        } else {
-                            println("Failed to save image, but bitmap is available")
-                            onResult.invoke(SharedImage(bitmap)) // Sin path permanente
-                        }
+                        onResult.invoke(SharedImage(bitmap))
                     } else {
                         println("Failed to create bitmap from URI")
                         onResult.invoke(null)
@@ -53,10 +49,14 @@ actual fun rememberCameraManager(onResult: (SharedImage?) -> Unit): CameraManage
 
     return remember {
         CameraManager(
-            onLaunch = {
+            onLaunch = { // eset es el calllback que se le pasa por propiedad, y es la ue se ejecuta en el metodo de la clase
                 try {
-                    val uri = AndroidFileProvider.getImageUri(context)
-                    if (uri != null) {
+                    val uri = AndroidFileProvider.createTempFileUri(
+                        context = context,
+                        prefix = "image",
+                        extensions = "png"
+                    )
+                    if(uri != null){
                         tmpPhotoUri = uri
                         cameraLaunch.launch(input = uri)
                     } else {

@@ -24,7 +24,7 @@ sqldelight = "2.1.0"
 ktor = "3.2.3"
 
 
-
+work_version = "2.10.4"
 
 
 coreKtx = "1.17.0"
@@ -43,6 +43,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 androidx-core-ktx-v1170 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 
 
+androidx-work-runtime =  { module = "androidx.work:work-runtime-ktx", version.ref = "work-version"}
 
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }

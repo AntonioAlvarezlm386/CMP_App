@@ -2,6 +2,7 @@ package org.practice.project
 
 import android.app.Application
 import org.koin.dsl.module
+import org.practice.project.backgroundTasks.ScheduleWorker
 
 class BaseApplication : Application(){
     override fun onCreate() {
@@ -13,5 +14,6 @@ class BaseApplication : Application(){
                 }
             )
         }
+        ScheduleWorker().scheduleSync(this)
     }
 }

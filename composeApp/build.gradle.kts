@@ -40,7 +40,7 @@ kotlin {
             implementation(libs.android.driver)
             implementation(libs.koin.android)
 
-
+            implementation(libs.androidx.work.runtime)
 
             // Camera X
             implementation(libs.androidx.camera.core)
