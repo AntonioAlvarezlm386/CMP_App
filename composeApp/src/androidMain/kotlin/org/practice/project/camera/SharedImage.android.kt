@@ -15,7 +15,7 @@ actual class SharedImage(
     actual fun toByteArray(): ByteArray? {
         return bitmap?.let {
             val stream = ByteArrayOutputStream()
-            it.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            it.compress(Bitmap.CompressFormat.JPEG, 90, stream)
             stream.toByteArray()
         }
     }

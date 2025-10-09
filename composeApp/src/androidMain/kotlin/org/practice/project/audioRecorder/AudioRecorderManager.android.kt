@@ -102,11 +102,12 @@ actual fun rememberAudioRecorder(onResult: (SharedAudio?) -> Unit): AudioRecorde
 }
 
 actual fun createTempAudioFile(): SharedAudio {
-    val timeStamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault())
-        .format(java.util.Date())
-    val fileName = "AUDIO_${timeStamp}.m4a"
-    val cacheDir = AndroidContextHandler.context.cacheDir
-    val filePath = java.io.File(cacheDir, fileName).absolutePath
-
-    return SharedAudio(filePath, fileName)
+//    val timeStamp = java.text.SimpleDateFormat("yyyyMMdd_HHmmss", java.util.Locale.getDefault())
+//        .format(java.util.Date())
+//    val fileName = "AUDIO_${timeStamp}.m4a"
+//    val cacheDir = AndroidContextHandler.context.cacheDir
+//    val filePath = java.io.File(cacheDir, fileName).absolutePath
+//
+//    return SharedAudio(filePath, fileName)
+    TODO()
 }

@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -30,17 +31,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun CameraScreen(
 ){
-    val viewModel = viewModel<CameraScreenViewModel>()
-    val sharedImageState = remember { mutableStateOf<SharedImage?>(null) }
+    val viewModel = koinViewModel<CameraScreenViewModel>()
+    val uiState by viewModel.sharedImage.collectAsStateWithLifecycle()
 
     val cameraManager = rememberCameraManager { capturedImage ->
-        sharedImageState.value = capturedImage
+        viewModel.setImage(capturedImage)
     }
 
     LaunchedEffect(Unit) {
@@ -56,7 +59,8 @@ fun CameraScreen(
         onClickCamera = {
             cameraManager.launch()
         },
-        sharedImage = sharedImageState.value
+        sharedImage = uiState,
+        onSave = viewModel::onSave
     )
 }
 
@@ -64,7 +68,8 @@ fun CameraScreen(
 @Composable
 fun NewsScreen(
     onClickCamera: () -> Unit,
-    sharedImage: SharedImage? = null
+    sharedImage: SharedImage? = null,
+    onSave: () -> Unit
 ) {
     Scaffold(
         bottomBar = {
@@ -99,7 +104,8 @@ fun NewsScreen(
 
                     ImagePickerContent(
                         sharedImage = sharedImage,
-                        onClickCamera = onClickCamera
+                        onClickCamera = onClickCamera,
+                        onSave = onSave
                     )
                 }
             }
@@ -111,7 +117,8 @@ fun NewsScreen(
 @Composable
 fun ImagePickerContent(
     sharedImage: SharedImage?,
-    onClickCamera: () -> Unit
+    onClickCamera: () -> Unit,
+    onSave: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -148,6 +155,9 @@ fun ImagePickerContent(
         ) {
             Button(onClick = onClickCamera, content = {
                 Text(text = "tomar foto")
+            })
+            Button(onClick = onSave, content = {
+                Text(text = "guardar")
             })
         }
     }
