@@ -66,6 +66,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
 
 
+            implementation(projects.prueb)
             // Coroutines
             implementation(libs.kotlinx.coroutines.core)
 

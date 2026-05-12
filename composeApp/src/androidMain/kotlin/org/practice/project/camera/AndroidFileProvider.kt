@@ -7,7 +7,7 @@ import org.practice.project.R
 import java.io.File
 
 class AndroidFileProvider: FileProvider(
-    R.xml.path_provider
+
 ) {
     companion object {
         fun createTempFileUri(
